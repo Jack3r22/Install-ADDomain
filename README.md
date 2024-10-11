@@ -19,7 +19,7 @@
 2. **Ejecución:** Abre una ventana de PowerShell con privilegios administrativos y ejecuta el script utilizando el siguiente comando:
 
    ```powershell
-   .\Install-ADDomain.ps1
+   .\InstallAD.ps1
 
 ## **Características principales:**
 
