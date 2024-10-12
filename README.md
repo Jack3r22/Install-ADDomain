@@ -1,6 +1,7 @@
 # Install AD Domain by PowerShell
 **Este script de PowerShell está diseñado para automatizar el proceso de instalación y configuración de un dominio de Active Directory (AD) en un servidor Windows Server. Proporciona una interfaz sencilla para que el administrador seleccione las opciones de configuración necesarias. Las funciones principales son:**
 * **Instalación de AD Domain Services:** Instala el rol de Active Directory si aún no está presente en el servidor.
+* **Instalacion de herrramientas:** Instala las herramientas administrativas relacionadas con AD, como por ejemplo 'Usuarios y equipos del dominio'
 * **Selección del nivel funcional:** Permite al usuario elegir el nivel funcional tanto del bosque como del dominio de AD, lo que determina las características y funcionalidades disponibles en el entorno.
 * **Configuración de AD:** Configura el dominio recién creado, incluyendo:
    * Nombre de dominio
