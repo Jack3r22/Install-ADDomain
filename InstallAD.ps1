@@ -67,6 +67,18 @@ function DomainMode {
 
 }
 
+
+function configAD {
+
+    $FM=forestMode
+    $DM=DomainMode
+    $DomainName = Read-Host "Instroduce el nombre del dominio (ejemplo : example.local)" 
+    $netBIOS = ($DomainName -split '\.')[0]
+
+    Install-ADDSForest -ForestMode $FM -DomainMode $DM -DomainName $DomainName -DomainNetBIOSName $netBIOS -DataBasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SYSVOLPath "C:\Windows\SYSVOL" -InstallDNS:$true -CreateDNSDelegation:$false -NoRebootOnCompletion:$false -Force:$true
+
+}
+
 #Verificar el estado del modulo 
 if ((Get-WindowsFeature AD-Domain-Services  | Select-Object -ExpandProperty InstallState) -eq "Available" ){
     
@@ -74,19 +86,12 @@ if ((Get-WindowsFeature AD-Domain-Services  | Select-Object -ExpandProperty Inst
     sleep 5
 
     #Instalar Rol de Active Directory 
-    Install-WindowsFeature AD-Domain-Services
-
+    Install-WindowsFeature AD-Domain-Services -IncludeManagementTools 
+    configAD
 }
 
 else{
 
     Write-Host "AD ya esta instalado, se va a configurar"
-
-    #Configurar AD
-    $FM=forestMode
-    $DM=DomainMode
-    $DomainName = Read-Host "Instroduce el nombre del dominio (ejemplo : example.local)" 
-    $netBIOS = ($DomainName -split '\.')[0]
-
-    Install-ADDSForest -ForestMode $FM -DomainMode $DM -DomainName $DomainName -DomainNetBIOSName $netBIOS -DataBasePath "C:\Windows\NTDS" -LogPath "C:\Windows\NTDS" -SYSVOLPath "C:\Windows\SYSVOL" -InstallDNS:$true -CreateDNSDelegation:$false -NoRebootOnCompletion:$false -Force:$true
+    configAD
 }
